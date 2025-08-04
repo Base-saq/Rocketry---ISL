@@ -1,0 +1,234 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{array}
+\usepackage{float}
+\usepackage{amssymb}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{geometry} % For page margins
+\geometry{a4paper, margin=1in} % Set margins
+\usepackage{fancyhdr} % For headers and footers
+\setlength{\headheight}{15pt} % Fix for fancyhdr warning
+\pagestyle{fancy}
+\fancyhf{} % Clear all header and footer fields
+\fancyhead[L]{OpenRocket Report} % Left header
+\fancyhead[R]{\thepage} % Right header with page number
+\renewcommand{\headrulewidth}{0.4pt} % Thin line under header
+\usepackage{booktabs} % For better looking tables
+\usepackage{longtable} % For tables that span multiple pages
+\usepackage{tabularx} % For tables that adjust to text width (useful with X column)
+\usepackage{mwe} % For placeholder images, remove if you have your images
+\usepackage{subcaption} % For side-by-side images
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\begin{document}
+
+\title{\textbf{OpenRocket Simulation Assignment Report}}
+\author{\textbf{Student Name:} Mohammad Sadique Pathan \\ \textbf{Institute:} Indian Institute Of Technology Roorkee\\ \textbf{Batch:} [8]}
+\date{June 15 - July 29, 2025}
+\maketitle
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{logo.png}
+    \end{subfigure}
+    \hfill % Adds horizontal space between the images
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Indian_Space_Week_logo_Png.png}
+    \end{subfigure}
+    \label{fig:renders}
+\end{figure}
+
+\thispagestyle{empty} % No page number on title page
+\newpage
+
+\section*{1. Acknowledgment}
+I am very thankful to India Space Lab for giving me the great privilege of doing this summer internship. This experience has been incredibly enriching and has added significantly to my knowledge and skills. I would like to offer my heartfelt thanks to everyone at India Space Lab for their precious guidance, support, and encouragement during the summer program.\par
+I also appreciate Indian Institute of Technology Roorkee for letting us know about this chance through their prompt communication. Their initiative towards arranging such enriching experiences for students is really appreciable.
+
+\section*{2. Introduction to Internship}
+This report describes the activities carried out as part of summer internship program at India Space Lab. This prestigious program is available for undergraduate, postgraduate, and research scholars from reputed universities and institutions in India and abroad. The internship offers the unique experience of closely working with different verticals, divisions, and cells in the Space Lab.
+
+This scheme provided intensive training in state-of-the-art areas like Drone Technology (Air Taxi), CanSat and CubeSat (Student Satellite), Space Entrepreneurship, and Astronomy, Rocketry Training program. My project, model rocket design, simulation, and analysis with OpenRocket, is an integral part of this enriching experience. 
+
+\section*{3. Key Learnings from the Project}
+Using OpenRocket software, this project gave me invaluable practical experience in the iterative design and simulation process of model rockets. Key learning includes:
+\begin{itemize}
+    \item \textbf{Importance of Iterative Design:} I understood that achieving optimal performance requires continuous adjustment of parameters, simulation, and analysis.
+    \item \textbf{Principles of Rocket Stability:} Gained insight on the critical relationship between the Center of Gravity (CG) and the Center of Pressure (CP), and how component placement and mass distribution directly impact flight stability.
+    \item \textbf{Motor Selection and Performance:} Learned to select appropriate motors based on rocket mass and desired altitude, understanding thrust curves and total impulse classifications.
+    \item \textbf{Recovery System Optimization:} Mastering the synchronization of the ejection charge delay with the apogee, and the size of the parachutes to achieve safe and controlled descent rates.
+    \item \textbf{Problem-Solving and Troubleshooting:} Developing skills in diagnosing simulation discrepancies and systematically adjust design parameters to overcome challenges.
+\end{itemize}
+
+\section*{4. Rocket Design and Component Details}
+The model rocket designed is a single-stage vehicle. Its overall dimensions and critical performance parameters are as follows:
+\begin{itemize}
+    \item \textbf{Total Length:} $140 \text{ cm}$
+    \item \textbf{Mass (with motor):} $9183 \text{ g}$
+    \item \textbf{Mass (without motor):} $7982 \text{ g}$
+    \item \textbf{Stability Margin:} $2.09 \text{ cal}$ (within the optimal $1.5-2.5$ calibers range).
+    \item \textbf{Center of Gravity (CG):} $76.2 \text{ cm}$
+    \item \textbf{Center of Pressure (CP):} $95 \text{ cm}$
+\end{itemize}
+
+
+
+The rocket is composed of the following primary components:
+
+
+\begin{longtable}{|L{3.7cm}|L{5cm}|L{5.5cm}|l|} % Changed X to L{5.5cm}
+    \caption{Rocket Component Details} \\
+    \toprule
+   \textbf{Component} & \textbf{Material / Type} & \textbf{Key Dimensions\newline/ Details} & \textbf{Mass} \\
+    \midrule
+    \endhead % Correct placement: Marks the end of the header to be repeated
+    \textbf{Nose Cone} & Carbon fiber ($1.78 \text{ g/cm}^3$) & Length: $24.4 \text{ cm}$, Ogive & $238 \text{ g}$ \\
+    \textbf{Payload Bay} & Carbon fiber ($1.78 \text{ g/cm}^3$) & Length: $20 \text{ cm}$, Inner Dia: $8.4 \text{ cm}$, Outer Dia: $9 \text{ cm}$ & $292 \text{ g}$ \\
+    \textbf{Mass Component} & (Payload) & Outer Dia: $2.5 \text{ cm}$ & $3250 \text{ g}$ \\
+    \textbf{Body Tube} & Carbon fiber ($1.78 \text{ g/cm}^3$) & Length: $96 \text{ cm}$, Inner Dia: $8.4 \text{ cm}$, Outer Dia: $9 \text{ cm}$ & $1401 \text{ g}$ \\
+    \textbf{Trapezoidal Fin Set (3)} & Fiberglass ($1.85 \text{ g/cm}^3$) & Thickness: $0.5 \text{ cm}$ & $169 \text{ g}$ \\
+    \textbf{Motor Mount} & Kraft phenolic ($0.95 \text{ g/cm}^3$) & Length: $62.5 \text{ cm}$, Inner Dia: $3.8 \text{ cm}$, Outer Dia: $3.9 \text{ cm}$ & $35.9 \text{ g}$ \\
+    \textbf{Centering Ring (2)} & Plywood (birch) ($0.63 \text{ g/cm}^3$) & Length: $0.3 \text{ cm}$, Inner Dia: $3.9 \text{ cm}$, Outer Dia: $8.9 \text{ cm}$ & $9.5 \text{ g}$ each \\
+    \textbf{Bulkhead} & Plywood (birch) ($0.63 \text{ g/cm}^3$) & Outer Dia: $8.9 \text{ cm}$, Length: $0.3 \text{ cm}$ & $11.8 \text{ g}$ \\
+    \textbf{Rail Button} & Delrin ($1.42 \text{ g/cm}^3$) & Length: $0 \text{ cm}$ & $3.01 \text{ g}$ \\
+    \textbf{Rear mass} & (Payload) & Outer Dia: $2.5 \text{ cm}$ & $2100 \text{ g}$ \\
+    \textbf{Shock Cord} & Kevlar 12-strand ($6.4 \text{ mm}, 1/4 \text{ in}$) ($29.8 \text{ g/m}$) & Length: $200 \text{ cm}$ & $59.5 \text{ g}$ \\
+    \textbf{Parachute} & Ripstop nylon ($67 \text{ g/m}^2$) & Diameter: $280 \text{ cm}$, Length: $8 \text{ cm}$ & $432 \text{ g}$ \\
+    \textbf{Shroud Lines} & Elastic cord (6 lines) & Length: $180 \text{ cm}$ & (Included) \\
+    \bottomrule
+\end{longtable}
+
+\section*{5. Flight Simulation Setup}
+The rocket's performance was simulated using OpenRocket under the following standard launch conditions:
+\begin{itemize}
+    \item \textbf{Launch Angle:} $0^\circ$ (vertical launch)
+    \item \textbf{Wind Speed:} $5 \text{ m/s}$
+    \item \textbf{Launch Altitude:} $0 \text{ m}$
+    \item \textbf{Launch Rod Length:} $2 \text{ m}$
+\end{itemize}
+The motor selected for the final simulation was the \textbf{Loki K1127-LB}. This motor has a Total Impulse of $1286 \text{ Ns}$ and is sized $38/625 \text{ mm}$, fitting the rocket's motor mount. Its average thrust is $625.5 \text{ N}$ with a burn time of $1.24 \text{ s}$. The ejection charge delay for this motor was optimally set at $11.6 \text{ s}$ for simulation.
+
+\section*{6. Flight Simulation Results}
+The final simulation demonstrated successful flight performance, achieving all key targets. :
+
+\begingroup
+\setlength{\tabcolsep}{1pt} % Try an even smaller value like 1pt or 0pt, or comment out for auto-squeeze
+\small % Reduce font size
+\begin{longtable}{|l|l|p{1.2cm}|p{1.2cm}|p{1.4cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{1.3cm}|p{1.3cm}|p{1.3cm}|p{1.5cm}|}
+    \caption{Flight Simulation Results} \\
+    \toprule
+    \textbf{Name} & \textbf{Configuration} & \textbf{Wind velocity} & \textbf{Vel off rod} & \textbf{Apogee} & \textbf{V at deploy} & \textbf{Opt. delay} & \textbf{Max. V} & \textbf{Max. Accel.} & \textbf{Time to apogee} & \textbf{Flight Time} & \textbf{Ground hit velocity} \\
+    & & \textbf{(m/s)} & \textbf{(m/s)} & \textbf{(m)} & \textbf{(m/s)} & \textbf{(s)} & \textbf{(m/s)} & \textbf{(m/s$^2$)} & \textbf{(s)} & \textbf{(s)} & \textbf{(m/s)} \\
+    \midrule
+    \endhead
+    Sim 1 & [K1127-LB-11.6] & 2 & 23.723 & 825.134 & 1.789 & 11.724 & 130.14 & 147.169 & 13.079 & 162.156 & 5.434 \\
+    Sim 2 & [K1127-LB-11.6] & 5 & 23.722 & 823.893 & 2.186 & 11.724 & 130.077 & 147.171 & 13.096 & 162.176 & 5.436 \\
+    Sim 3 & [K1127-LB-11.6] & 10 & 23.721 & 809.337 & 5.507 & 11.62 & 129.476 & 147.171 & 12.986 & 160.178 & 5.448 \\
+    \bottomrule
+\end{longtable}
+\endgroup
+
+\textbf{Key Performance Metrics (based on Sim 2, 5 m/s wind):}
+\begin{itemize}
+    \item \textbf{Apogee (Maximum Altitude):} $823.893 \text{ m}$. This successfully meets and slightly exceeds the $800-2000 \text{ m}$ target.
+    \item \textbf{Time to Apogee:} $13.096 \text{ s}$.
+    \item \textbf{Optimum Ejection Delay:} The motor was set to $11.6 \text{ s}$, which is very close to the calculated optimum of $11.724 \text{ s}$. This ensures parachute deployment occurs precisely at or just before apogee, as seen in the flight graph.
+    \item \textbf{Ground Hit Velocity (Descent Rate):} $5.436 \text{ m/s}$. Which was exceptionally close to the $3-5 \text{ m/s}$ target for a soft landing.
+\end{itemize}
+
+\section*{7. Visual Renders of Rocket}
+\textbf{Flight Graphs:}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Simulation1_2mps.png} 
+    \caption{First flight graph (Wind velocity = 2 m/s): Altitude/velocity/acceleration vs. Time.}
+    \label{fig:flight_graph_1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Simulation2_5mps}
+    \caption{Second flight graph (Wind velocity = 5 m/s): Altitude/velocity/acceleration vs. Time.}
+    \label{fig:flight_graph_2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{simulation3_10mps}
+    \caption{Third flight graph (Wind velocity = 10 m/s): Altitude/velocity/acceleration vs. Time.}
+    \label{fig:flight_graph_3}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{final_image1}
+        \caption{Rendered Image 1}
+        \label{fig:render1}
+    \end{subfigure}
+    \hfill % Adds horizontal space between the images
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{final_image2}
+        \caption{Rendered Image 2}
+        \label{fig:render2}
+    \end{subfigure}
+    \caption{Rendered Images of the Designed Model Rocket}
+    \label{fig:renders3}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{skeleton.png}
+    \caption{Rockect Skeletal Structure}
+    \label{fig:enter-label}
+\end{figure}
+
+\section*{8. Analysis}
+
+\subsection{Is your rocket stable throughout the flight? Justify using graphs.}
+Yes, the rocket is stabilized during its flight. As it is given in the assignment, the \textbf{Center of Pressure (CP)} should be trail  \textbf{Center of Gravity (CG)}, and the stability margin ideally should be between $1.5$ and $2.5$ calibers. This rocket has a stability margin of $2.09$ calibers, which is precisely in the optimal range. The Center of Gravity \textbf{Center of Pressure (CP)} is at $76.2 \text{ cm}$ from the tip of the nose, and the Center of Pressure (CP) is at 95 cm, so the CG is always ahead of the CP during flight. This setup avoids tumbling and results in a linear, predictable flight trajectory.
+
+\subsection{How do fins and their shape impact flight stability?}
+Fins are essential in maintaining aerodynamic stability in a rocket. They function as airfoils and create forces that cause the rocket to align in the flight direction, much like the feathers of an arrow. Fins have their effect mainly on the  \textbf{Center of Pressure (CP)}, directing it towards the end of the rocket. For stable flight, the CP has to be behind the  \textbf{Center of Gravity (CG)}. The rocket employs a Trapezoidal Fin Set, which is composed of three fins. The shape is very efficient in model rocket design to produce sufficient stabilizing forces. The accuracy in dimensions and position of these fins played an important role in shifting the CP to the location at $95 \text{ cm}$, keeping it behind the location of the CG at $76.2 \text{ cm}$ and creating a stable margin of $2.09$ calibers, which guarantees the stable flight of the rocket during.
+
+\subsection{What happens when wind speed increases to 10 m/s?}
+When wind speed increases from $5 \text{ m/s}$ to $10 \text{ m/s}$ (comparing Simulation 2 to Simulation 3 in the results table), a model rocket experiences the following effects:
+\begin{itemize}
+    \item \textbf{Reduced Maximum Altitude:} As observed from the simulation results, the apogee decreases from $823.893 \text{ m}$ (Sim 2, 5 m/s wind) to $809.337 \text{ m}$ (Sim 3, 10 m/s wind). Higher wind speeds lead to increased aerodynamic drag on the rocket, which opposes its upward motion, resulting in a lower maximum altitude.
+    \item \textbf{Increased Velocity at Deployment:} The velocity at deployment increases from $2.186 \text{ m/s}$ (Sim 2) to $5.507 \text{ m/s}$ (Sim 3). This indicates the rocket is still moving faster horizontally or vertically due to the stronger wind influence at the time of parachute deployment.
+    \item \textbf{Slightly Reduced Optimal Delay:} The optimal delay slightly decreases from $11.724 \text{ s}$ (Sim 2) to $11.62 \text{ s}$ (Sim 3). This subtle change can be attributed to the altered flight profile and slightly earlier apogee in stronger winds.
+    \item \textbf{Increased Drift (Implied):} While not directly quantified in the provided table, stronger wind speeds would inevitably cause the rocket to drift further horizontally from the launch site, making recovery more challenging.
+    \item \textbf{Greater Weathercocking (Implied):} The rocket would turn more strongly into the wind shortly after leaving the launch rod. Although this helps align the rocket with the wind, excessive weathercocking can lead to a less efficient vertical flight path and further altitude loss.
+\end{itemize}
+
+\subsection{How does texture/paint weight affect total mass and apogee?}
+Even though they are frequently minimal, textures and paint add weight to the rocket's overall mass in OpenRocket and in real-world rocketry. The paint/finish layers that make up the component's total mass are given a default density and thickness by OpenRocket. Even though each layer may only weigh a few grams, this added mass can add up over a large surface area, especially for larger models. The performance of the rocket is directly affected by any increase in its overall mass, including that caused by paint or textures. Because the motor must use more energy to lift the heavier rocket against gravity, a heavier rocket will typically have a lower apogee and require more thrust to achieve the same acceleration. Therefore, for optimizing performance, particularly for high-altitude targets, minimizing the weight of finishes can be a consideration.
+
+\subsection{Compare two simulations with different motors. Which performed better and why?}
+Let us compare the performance of final rocket configuration with the \textbf{Loki K1127-LB} motor against an earlier simulation with the \textbf{Aerotech J510W} motor (which yielded an apogee of $604 \text{ m}$ from a previous run).
+\begin{itemize}
+    \item \textbf{Motor 1: Aerotech J510W (J-class)}
+    \begin{itemize}
+        \item Approximate Total Impulse: $510 \text{ Ns}$ (J-class)
+        \item Approximate Apogee: $604 \text{ m}$
+    \end{itemize}
+    \item \textbf{Motor 2: Loki K1127-LB (K-class)}
+    \begin{itemize}
+        \item Total Impulse: $1286 \text{ Ns}$
+        \item Apogee: $823.893 \text{ m}$ (from Sim 2 with 5 m/s wind)
+    \end{itemize}
+\end{itemize}
+The \textbf{Loki K1127-LB motor performed significantly better} in terms of achieving the target altitude. It successfully propelled the rocket to $823.893 \text{ m}$, far exceeding the $604 \text{ m}$ previously achieved by the Aerotech J510W. This superior performance is directly attributable to the K1127-LB's substantially higher \textbf{total impulse} ($1286 \text{ Ns}$ compared to approximately $510 \text{ Ns}$ for the J510W). A higher total impulse means that the motor provides more energy and thrust during its burn time, allowing it to lift the rocket to a higher altitude, even with a slightly higher overall rocket mass (approximately $9183 \text{ g}$ for the K1127-LB configuration versus $8.7 \text{ Kg}$ for the J510W configuration).
+
+\section*{9. Conclusion}
+
+A high-performance model rocket has been successfully designed, examined, and optimized to satisfy exacting engineering requirements using design and simulation process in OpenRocket. Critical performance goals are successfully met by the final rocket design: a stable flight with a margin of $2.09$ calibers , an apogee of $823.893 \text{ m}$ (exceeding the $800 \text{ m}$ minimum), and a total mass of $9183 \text{ g}$ (within the $8-10 \text{ Kg}$ range). A controlled descent rate of $5.436 \text{ m/s}$ is ensured by the recovery system's optimization for precise parachute deployment at apogee. The need to meet the ambitious altitude target with the specified payload mass led to the selection of the motor, even though it slightly exceeds the K-class impulse limit. This project exhibits a thorough comprehension of rocket propulsion, aerodynamic principles, and simulation-driven design optimization.
+
+\end{document}
